@@ -8,5 +8,6 @@
   <name>demo-projects</name>
   <modules>
     <module>demo-springboot-helloworld</module>
+    <module>demo-microservice-bookstore</module>
   </modules>
 </project>

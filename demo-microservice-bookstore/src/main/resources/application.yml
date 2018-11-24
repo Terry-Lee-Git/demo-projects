@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: book-service
+  jpa:
+    generate-ddl: true
+    show-sql: true
+
+entitymanager:
+  packagesToScan: demo.microservice.bookstore.model 
+
+server:
+    port: 8090
