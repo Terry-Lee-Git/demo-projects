@@ -27,8 +27,8 @@ public interface BookService {
     List<Book> getBooks();
 
     @ApiOperation(
-            value = "Search books by ids", nickname = "searchBooksByIds",
-            notes = "Multiple ids can be provided with comma separated strings. Use id1,id2,id3 for testing.", tags={ "book" },
+            value = "Search books by name", nickname = "searchBooksByKeyword",
+            notes = "Use keyword for testing.", tags={ "book" },
             response = Book.class, responseContainer = "List"
         )
     @ApiResponses(value = {
@@ -38,8 +38,8 @@ public interface BookService {
     @RequestMapping(value = "/books/search",
             produces = {"application/json" },
             method = RequestMethod.GET)
-    List<Book> searchBooksByIds(@NotNull @ApiParam(value = "Ids to filter by", required = true) @Valid
-                                @RequestParam(value = "ids", required = true) List<String> ids);
+    List<Book> searchBooksByKeyword(@NotNull @ApiParam(value = "keyword to filter by", required = true) @Valid
+                                @RequestParam(value = "keyword", required = true) String keyword);
 
     @ApiOperation(
             value = "Get a book by id", nickname = "getBook", notes = "", tags={ "book" },
