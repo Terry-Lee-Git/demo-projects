@@ -1,6 +1,19 @@
 spring:
   application:
     name: book-service
+  jpa:
+      generate-ddl: true
+      show-sql: true
+      hibernate:
+        ddl-auto: update
+  datasource:
+      url: jdbc:h2:file:~/.h2/booksdb
+      driverClassName: org.h2.Driver
+      username: root
+      password: 123456
+
+entitymanager:
+  packagesToScan: demo.microservice.bookstore.model
 
 server:
     port: 8090

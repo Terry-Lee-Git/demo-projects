@@ -2,10 +2,7 @@ package demo.microservice.bookstore.api;
 
 import demo.microservice.bookstore.model.Book;
 import io.swagger.annotations.*;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
@@ -33,7 +30,7 @@ public interface BookService {
         )
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "successful operation", response = Book.class, responseContainer = "List"),
-            @ApiResponse(code = 405, message = "Invalid input")
+            @ApiResponse(code = 403, message = "Invalid input")
         })
     @RequestMapping(value = "/books/search",
             produces = {"application/json" },
@@ -51,4 +48,15 @@ public interface BookService {
             produces = {"application/json" },
             method = RequestMethod.GET)
     Book getBook(@NotNull @ApiParam(value = "ID of the Book", required = true) @PathVariable("id") int id);
+
+    @ApiOperation(
+            value = "Add a book", nickname = "addBook", notes = "", tags={ "book" },
+            response = Book.class)
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "successful operation", response = Book.class),
+            @ApiResponse(code = 403, message = "Invalid input")  })
+    @RequestMapping(value = "/books",
+            produces = {"application/json" },
+            method = RequestMethod.POST)
+    Book addBook(@NotNull @ApiParam(value = "Book object needs to be added into the store", required = true) @Valid @RequestBody Book book);
 }

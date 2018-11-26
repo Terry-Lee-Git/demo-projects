@@ -2,18 +2,24 @@ package demo.microservice.bookstore.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.validation.annotation.Validated;
-
+import javax.persistence.*;
 import java.io.Serializable;
 
 @Validated
+@Entity
+@Table(name = "book")
 public class Book implements Serializable {
     @JsonProperty("id")
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
     @JsonProperty("name")
+    @Column(name = "name")
     private String name;
 
     @JsonProperty("price")
+    @Column(name = "price")
     private double price;
 
     public Book() {

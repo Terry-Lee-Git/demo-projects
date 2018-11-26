@@ -1,6 +1,8 @@
 package demo.microservice.bookstore.Controller;
 
+import demo.microservice.bookstore.Util;
 import demo.microservice.bookstore.api.BookService;
+import demo.microservice.bookstore.exception.ForbiddenActionException;
 import demo.microservice.bookstore.exception.ResourceNotFoundException;
 import demo.microservice.bookstore.model.Book;
 import io.swagger.annotations.ApiParam;
@@ -16,9 +18,16 @@ import java.util.List;
 import org.springframework.core.env.Environment;
 import org.springframework.util.StringUtils;
 
+/**
+ * For Swagger definition, can refer to class:
+ *    https://github.com/swagger-api/swagger-codegen/blob/master/samples/server/petstore/springboot/src/main/java/io/swagger/api/PetApi.java
+ */
 @RestController
 public class BookController implements BookService {
     private final Logger logger = Logger.getLogger(getClass());
+
+    @Autowired
+    BookRepository bookRepository;
 
     @Autowired
     Environment environment;
@@ -27,7 +36,14 @@ public class BookController implements BookService {
     @Override
     public List<Book> getBooks() {
         logServiceInstance("/books");
-        return BookStorage.instance().getBookList();
+        List<Book> resultList = getAllBooks();
+        logServiceInstance("/books, resultList=" + resultList);
+        return resultList;
+    }
+
+    private List<Book> getAllBooks() {
+        Iterable<Book> iterable = bookRepository.findAll();
+        return Util.toList(iterable);
     }
     
     @Override
@@ -41,7 +57,7 @@ public class BookController implements BookService {
     	logServiceInstance("/books/search?keyword="+keyword);
     	
     	keyword = keyword.toLowerCase();
-    	List<Book> books = BookStorage.instance().getBookList();
+    	List<Book> books = getAllBooks();
         
         for (Book bookObj : books) {
         	if (bookObj != null 
@@ -50,6 +66,8 @@ public class BookController implements BookService {
         		resultList.add(bookObj);
         	}
         }
+
+        logServiceInstance("/books/search?keyword=" + keyword + ", resultList:" + resultList);
         return resultList;
 	}
 
@@ -58,20 +76,21 @@ public class BookController implements BookService {
     @Override
     public Book getBook(@NotNull @ApiParam(value = "ID of the Book", required = true) @PathVariable("id") int id) {
         logServiceInstance("/books/" + id);
-        List<Book> books = BookStorage.instance().getBookList();
-        
-        Book book = null;
-        for (Book bookObj : books) {
-        	if (bookObj != null && bookObj.getId() == id) {
-        		book = bookObj;
-        		break;
-        	}
-        }
+        Book book = bookRepository.findOne(id);
         logger.info(String.format("Find book: id(%s) ---> %s:", id, book));
         if (book == null) {
             throw new ResourceNotFoundException("Can not find Book by id:" + id);
         }
         return book;
+    }
+
+    @Override
+    public Book addBook(@NotNull Book book) {
+        if (book == null) {
+            throw new ForbiddenActionException("Invalid input, book:" + book);
+        }
+        Book savedBook = bookRepository.save(book);
+        return savedBook;
     }
 
 
