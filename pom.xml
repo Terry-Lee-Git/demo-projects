@@ -9,5 +9,6 @@
   <modules>
     <module>demo-springboot-helloworld</module>
     <module>demo-microservice-bookstore</module>
+    <module>demo-eureka-server</module>
   </modules>
 </project>

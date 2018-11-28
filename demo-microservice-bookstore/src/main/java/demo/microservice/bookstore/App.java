@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
+//@EnableDiscoveryClient
 @SpringBootApplication
 @EntityScan("demo.microservice.bookstore.model")
 @EnableSwagger2

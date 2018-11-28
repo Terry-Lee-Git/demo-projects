@@ -7,6 +7,7 @@ import demo.microservice.bookstore.exception.ResourceNotFoundException;
 import demo.microservice.bookstore.model.Book;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -21,6 +22,7 @@ import org.springframework.util.StringUtils;
 /**
  * For Swagger definition, can refer to class:
  *    https://github.com/swagger-api/swagger-codegen/blob/master/samples/server/petstore/springboot/src/main/java/io/swagger/api/PetApi.java
+ *    https://www.concretepage.com/spring-5/spring-data-crudrepository-example
  */
 @RestController
 public class BookController implements BookService {
@@ -75,7 +77,7 @@ public class BookController implements BookService {
 
     @Override
     public Book getBook(@NotNull @ApiParam(value = "ID of the Book", required = true) @PathVariable("id") int id) {
-        logServiceInstance("/books/" + id);
+        logServiceInstance(" GET /book/" + id);
         Book book = bookRepository.findOne(id);
         logger.info(String.format("Find book: id(%s) ---> %s:", id, book));
         if (book == null) {
@@ -86,11 +88,24 @@ public class BookController implements BookService {
 
     @Override
     public Book addBook(@NotNull Book book) {
+        logServiceInstance(" POST /book, addBook: book:" + book);
         if (book == null) {
             throw new ForbiddenActionException("Invalid input, book:" + book);
         }
         Book savedBook = bookRepository.save(book);
+        logger.info(String.format("Added book: %s:", book));
         return savedBook;
+    }
+
+    @Override
+    public Boolean updateBook(Book book) {
+        logServiceInstance(" PUT /book, addBook: book:" + book);
+        if (book == null || book.getId() <= 0) {
+            throw new ForbiddenActionException("Invalid input, book:" + book);
+        }
+        bookRepository.save(book);
+        logger.info(String.format("Updated book: %s:", book));
+        return true;
     }
 
 
