@@ -16,9 +16,9 @@ entitymanager:
   packagesToScan: demo.microservice.bookstore.model
 
 server:
-    port: 8090
+    port: 8010
 
 eureka:
   client:
     serviceUrl:
-      defaultZone: http://localhost:8700/eureka/
+      defaultZone: http://localhost:8000/eureka/
