@@ -20,7 +20,7 @@ b. Then open your Eclipse to import the project.
 
 
 -------------------------------------------------------------------
-1. Start Eureka Server
+1. Start up "Eureka Server"
 How to build:
 > cd demo-projects\demo-eureka-server\
 > mvn clean package
@@ -30,7 +30,7 @@ How to Startup:
 > java -jar demo-eureka-server-1.0-SNAPSHOT.jar
 
 URL Links:
-#Visit the Eureka Server website to view the micro services:
+#Visit the "micro-services" registered in the "Eureka server":
     http://localhost:8000/
 
 
