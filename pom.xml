@@ -7,7 +7,6 @@
   <packaging>pom</packaging>
   <name>demo-projects</name>
   <modules>
-    <module>demo-springboot-helloworld</module>
     <module>demo-microservice-bookstore</module>
     <module>demo-eureka-server</module>
     <module>demo-gateway</module>

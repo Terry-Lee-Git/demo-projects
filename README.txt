@@ -1,3 +1,11 @@
+This project is a demo for a micro-service.
+Inside the micro-service, it contains:
+  * Eureka Server
+  * Book Service
+  * Zuul Gateway
+
+
+-------------------------------------------------------------------
 h1. Precondition:
 Install JDK1.8, and set environment variable: JAVA_HOME
 Install Maven3 (3.5.0), and set environment variable: MAVEN_HOME
