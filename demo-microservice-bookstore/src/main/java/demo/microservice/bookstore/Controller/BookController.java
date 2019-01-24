@@ -99,7 +99,7 @@ public class BookController implements BookService {
 
     @Override
     public Boolean updateBook(Book book) {
-        logServiceInstance(" PUT /book, addBook: book:" + book);
+        logServiceInstance(" PUT /book, updateBook: book:" + book);
         if (book == null || book.getId() <= 0) {
             throw new ForbiddenActionException("Invalid input, book:" + book);
         }
