@@ -13,9 +13,10 @@ Install Maven3 (3.5.0), and set environment variable: MAVEN_HOME
 
 -------------------------------------------------------------------
 h1. How to import the project into Eclipse
-> cd demo-projects
-> mvn eclipse:eclipse
-Then open your Eclipse to import the project.
+a. Generate the Eclipse project files:
+    > cd demo-projects
+    > mvn eclipse:eclipse
+b. Then open your Eclipse to import the project.
 
 
 -------------------------------------------------------------------
@@ -50,9 +51,10 @@ URL Links:
     http://localhost:8010/v2/api-docs
 #Get all the books:
     http://localhost:8010/books
-#View a book by id:
+#View a book by id: (id = 2)
     http://localhost:8010/books/2
-#Find books by keywork "Java": http://localhost:8010/books/search?keyword=Java
+#Find books by keywork "Java":
+    http://localhost:8010/books/search?keyword=Java
 
 
 -------------------------------------------------------------------
@@ -67,7 +69,7 @@ How to Startup:
 
 URL Links: (Visit book-service api via Zuul gateway)
 http://localhost:8020/gateway-bookapi/books
-http://localhost:8020/gateway-bookapi/book/1
+http://localhost:8020/gateway-bookapi/book/2
 
 
 -------------------------------------------------------------------
