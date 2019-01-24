@@ -60,7 +60,7 @@ public interface BookService {
             produces = {"application/json" },
             method = RequestMethod.POST)
     Book addBook(@NotNull @ApiParam(value = "Book object needs to be added into the store", required = true) @Valid @RequestBody Book book);
-
+/*
     @ApiOperation(value = "Update an existing Book", nickname = "updateBook", notes = "")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "successful operation", response = Boolean.class),
@@ -72,4 +72,5 @@ public interface BookService {
             consumes = { "application/json"},
             method = RequestMethod.PUT)
     Boolean updateBook(@ApiParam(value = "Book object that needs to be updated" ,required=true )  @Valid @RequestBody Book body);
+    */
 }

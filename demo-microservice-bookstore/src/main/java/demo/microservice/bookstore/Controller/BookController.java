@@ -96,7 +96,7 @@ public class BookController implements BookService {
         logger.info(String.format("Added book: %s:", book));
         return savedBook;
     }
-
+/*
     @Override
     public Boolean updateBook(Book book) {
         logServiceInstance(" PUT /book, updateBook: book:" + book);
@@ -107,6 +107,7 @@ public class BookController implements BookService {
         logger.info(String.format("Updated book: %s:", book));
         return true;
     }
+    */
 
 
     private void logServiceInstance(String url) {
